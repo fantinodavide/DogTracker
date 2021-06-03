@@ -1,0 +1,232 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: verdana;
+    font-size: 14px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+*:focus{
+    outline: none;
+}
+
+body{
+    position: absolute;
+    padding-top: 50px;
+    height: calc(100% - 50px);
+    width: 100%;
+    display: flex;
+}
+header{
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 30px;
+    padding: 10px;
+    background: #1976d2;
+    box-shadow: 0 0 5px 2px #0008;
+    z-index: 10;
+}
+header h1{
+    font-size: 30px;
+    font-weight: normal;
+    color: #d00;
+    transition: all 200ms ease-in-out;
+}
+*[disabled]{
+    opacity: 0.5;
+}
+.hambContainer{
+    position: absolute;
+    left: 10px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+.hamburger{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #fff;
+    height: 2px;
+    border-radius: 2px;
+    width: 30px;
+    transition: all 150ms ease-in-out;
+}
+.hamburger::before{
+    content: "";
+    position: absolute;
+    top: -10px;
+    background: #fff;
+    height: 2px;
+    border-radius: 2px;
+    width: 30px;
+    transition: all 150ms ease-in-out;
+}
+.hamburger::after{
+    content: "";
+    position: absolute;
+    top: 10px;
+    background: #fff;
+    height: 2px;
+    border-radius: 2px;
+    width: 30px;
+    transition: all 150ms ease-in-out;
+}
+.hamburger.active{
+    width: 0px;
+}
+.hamburger.active::before{
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+}
+.hamburger.active::after{
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);
+}
+
+#sideMenu{
+    position: fixed;
+    height: calc(100% - 60px);
+    width: 200px;
+    bottom: 0px;
+    left: -200px;
+    //background: #29f;
+    background: #fff;
+    z-index: 9;
+    box-shadow: 0 0 5px 2px #0008;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    transition: all 200ms ease-in-out;
+}
+#sideMenu.active{
+    left: 0;
+}
+#sideMenu button{
+    position: relative;
+    //width: 100%;
+    height: 30px;
+    color: #333;
+    background: #fff;
+    border: none;
+    //border-bottom: 3px solid #29f;
+    transition: all 150ms ease-in-out;
+    padding-left: 20px;
+    text-align: left;
+    cursor: pointer;
+}
+#sideMenu button:hover{
+    border-right: 3px solid #29f;
+}
+#sideMenu button.curMode{
+    background: #29f;
+    color: #fff;
+}
+#sideMenu .separator{
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+.map {
+    position: relative;
+    //height: 800px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.map .ol-attribution.ol-unselectable.ol-control.ol-uncollapsible{
+    display: none;
+}
+
+#innerContainer{
+    position: relative;
+    width: 100%;
+    margin: 0px;
+}
+
+.collarePoint, .cercatorePoint{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background: #fb8c00;
+    box-shadow: 1px 1px 3px 0 #0008;
+    transform: translate(-50%,-50%);
+    z-index: 2;
+    pointer-events: none;
+    //transition: top 200ms ease-in-out, left 200ms ease-in-out;
+}
+.collarePoint.noTransition, .cercatorePoint.noTransition{
+    //transition: top 0 ease-in-out, left 0 ease-in-out;
+}
+.collarePoint::after{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 95%;
+    height: 95%;
+    border-radius: 50px;
+    content: "";
+    animation: pointerAnimation 1s infinite;
+    //border: 1px solid #f00;
+    background: inherit;
+    transform: translate(-50%,-50%);
+    z-index: ;
+}
+
+@keyframes pointerAnimation {
+    0%{
+        opacity: 0.7;
+    }
+    100%{
+        width: 400%;
+        height: 400%;
+        opacity: 0;
+    }
+}
+.cercatorePoint{
+    width: 15px;
+    height: 15px;
+}
+/*.cercatorePoint::after{
+    position: absolute;
+    content: "";
+    width: 9px;
+    height: 9px;
+    top: 53%;
+    left: 51%;
+    background: inherit;
+    transform: translateX(-50%) rotate(45deg);
+}*/
+
+
+.perimeterPointer{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background: #b00;
+    box-shadow: 1px 1px 3px 0 #0008;
+    transform: translate(-50%,-50%);
+    z-index: 4;
+    transition: transform 300ms ease-in-out, background 150ms ease-in-out;
+}
+svg{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 3;
+    pointer-events: none;
+}
+line{
+    stroke: #f00;
+    stroke-width: 2;
+    z-index: 2;
+    transition: stroke 300ms ease-in-out;
+}

@@ -1,0 +1,4 @@
+App/node_modules/**
+App/signApp.bat
+App/*.keystore
+App/*.apk
