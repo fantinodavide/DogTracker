@@ -290,15 +290,27 @@ void exLoraAction(int recipient, int sender, String type, String val, String msg
   }else if(type == "conf"){
     if(val == "sendPos"){
       cycleLoraSend(true);
-    }
-    if(val.startsWith("setBoardname:")){
+    }else if(val.startsWith("setBoardname:")){
       String bNm = val.substring(13);//splitStr(val,':',1);     
-      File file = SPIFFS.open("/pCoords.json", FILE_WRITE);
+      File file = SPIFFS.open("/bConf.json", FILE_WRITE);
       if (file) {
-        file.print(pload.substring(8));
+        file.print("bName:"+bNm+"\n");
       }
       file.close();
       Serial.println("Received boardName: " + bNm);
+    }else if(val == "getBoardname"){String output = "";
+      File file = SPIFFS.open("/bConf.txt", FILE_READ);
+      if(!file) return "Error reading file";
+      else{
+        while (file.available()) {
+          String tmpRead = file.readString();
+          if(tmpRead == "\n")
+            break;
+          output += tmpRead;
+        }
+      }
+      file.close();
+      loraSendMessage(String("conf") , , String(++msgSent), true);
     }
   }
 
